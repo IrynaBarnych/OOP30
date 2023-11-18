@@ -15,7 +15,7 @@ class DomesticAnimal:
     def sound(self):
         pass
     def show(self):
-        print(f"Ім'я {self.name}")
+        print(f"Ім'я: {self.name}")
     def type(self):
         pass
 class Dog(DomesticAnimal):
@@ -26,7 +26,7 @@ class Dog(DomesticAnimal):
         super().show()
 
     def type(self):
-        print(f"Тип тварини {self.type_of_animal}")
+        print(f"Тип тварини: {self.type_of_animal}")
 
 class Cat(DomesticAnimal):
     def sound(self):
@@ -36,17 +36,15 @@ class Cat(DomesticAnimal):
         super().show()
 
     def type(self):
-        print(f"Тип тварини {self.type_of_animal}")
+        print(f"Тип тварини: {self.type_of_animal}")
 
 class Parrot(DomesticAnimal):
     def sound(self):
         print("Ку-ка-рі-ку")
-
     def show(self):
         super().show()
-
     def type(self):
-        print(f"Тип тварини {self.type_of_animal}")
+        print(f"Тип тварини: {self.type_of_animal}")
 
 class Hamster(DomesticAnimal):
     def sound(self):
@@ -56,8 +54,25 @@ class Hamster(DomesticAnimal):
         super().show()
 
     def type(self):
-        print(f"Тип тварини {self.type_of_animal}")
+        print(f"Тип тварини: {self.type_of_animal}")
+
 dog = Dog("Rey", "dog")
 dog.sound()
 dog.show()
 dog.type()
+print()
+cat = Cat("Murchuk", "cat")
+cat.sound()
+cat.show()
+cat.type()
+print()
+parrot = Parrot("Kuzya", "parrot")
+parrot.sound()
+parrot.show()
+parrot.type()
+print()
+hamster = Hamster("Busya", "hamster")
+hamster.sound()
+hamster.show()
+hamster.type()
+print()
