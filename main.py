@@ -6,9 +6,19 @@
 # про фігуру).
 
 import math
+
 class Figure:
     def __init__(self, name):
         self.name = name
+
+    def area(self):
+        pass
+
+    def __int__(self):
+        return int(self.area())  # Змінено на int(self.area())
+
+    def __str__(self):
+        return f"{self.name} - Площа: {self.area()}"
 
 class Rectangle(Figure):
     def __init__(self, name, length, width):
@@ -48,13 +58,19 @@ class Trapezium(Figure):
 
 # Приклад використання:
 rectangle = Rectangle("Прямокутник", 4, 6)
-print(f"{rectangle.name}: Площа = {rectangle.area()}")
+print(int(rectangle))
+print(str(rectangle))
 
 circle = Circle("Коло", 5)
-print(f"{circle.name}: Площа = {circle.area()}")
+print(int(circle))
+print(str(circle))
 
 triangle = Triangle("Прямокутний трикутник", 3, 4)
-print(f"{triangle.name}: Площа = {triangle.area()}")
+print(int(triangle))
+print(str(triangle))
 
 trapezium = Trapezium("Трапеція", 2, 5, 3)
-print(f"{trapezium.name}: Площа = {trapezium.area()}")
+print(int(trapezium))
+print(str(trapezium))
+
+
