@@ -1,66 +1,57 @@
-# Завдання 4
-# Створіть базовий клас Employer (службовець) з функцією Print(). Функція має виводити інформацію про службовця.
-# Для базового класу це може бути рядок із написом
-# «This is Employer class».
-# Створіть від нього три похідні класи: President, Manager, Worker. Перевизначте функцію Print() для виведення
-# інформації, що відповідає кожному типу службовця.
-# Завдання 5
-# Для класів із попереднього завдання реалізуйте магічний метод str, а також метод int (який повертає вік
-# службовця).
+# Завдання 1
+# Створіть базовий клас «Фігура» з методом для підрахунку площі. Створіть похідні класи: прямокутник, коло,
+# прямокутний трикутник, трапеція, зі своїми методами для підрахунку площі.
 
-class Employer:
-    def __init__(self, age):
-        self.age = age
+import math
+class Figure:
+    def __init__(self, name):
+        self.name = name
 
-    def print_info(self):
-        print("This is Employer class")
+class Rectangle(Figure):
+    def __init__(self, name, length, width):
+        super().__init__(name)
+        self.length = length
+        self.width = width
 
-    def __str__(self):
-        return f"Employer (Age: {self.age})"
+    def area(self):
+        return self.length * self.width
 
-    def get_age(self):
-        return self.age
+class Circle(Figure):
+    def __init__(self, name, radius):
+        super().__init__(name)
+        self.radius = radius
 
-class President(Employer):
-    def print_info(self):
-        print("This is President class")
+    def area(self):
+        return math.pi * self.radius**2
 
-    def __str__(self):
-        return f"President (Age: {self.age})"
+class Triangle(Figure):
+    def __init__(self, name, base, height):
+        super().__init__(name)
+        self.base = base
+        self.height = height
 
-class Manager(Employer):
-    def print_info(self):
-        print("This is Manager class")
+    def area(self):
+        return 0.5 * self.base * self.height
 
-    def __str__(self):
-        return f"Manager (Age: {self.age})"
+class Trapezium(Figure):
+    def __init__(self, name, a, b, height):
+        super().__init__(name)
+        self.a = a
+        self.b = b
+        self.height = height
 
-class Worker(Employer):
-    def print_info(self):
-        print("This is Worker class")
-
-    def __str__(self):
-        return f"Worker (Age: {self.age})"
+    def area(self):
+        return 0.5 * (self.a + self.b) * self.height
 
 # Приклад використання:
-employer = Employer(30)
-employer.print_info()
-print(str(employer))
-print("Age:", employer.get_age())
+rectangle = Rectangle("Прямокутник", 4, 6)
+print(f"{rectangle.name}: Площа = {rectangle.area()}")
 
-president = President(age=45)
-president.print_info()
-print(str(president))
-print("Age:", president.get_age())
+circle = Circle("Коло", 5)
+print(f"{circle.name}: Площа = {circle.area()}")
 
-manager = Manager(age=35)
-manager.print_info()
-print(str(manager))
-print("Age:", manager.get_age())
+triangle = Triangle("Прямокутний трикутник", 3, 4)
+print(f"{triangle.name}: Площа = {triangle.area()}")
 
-worker = Worker(age=25)
-worker.print_info()
-print(str(worker))
-print("Age:", worker.get_age())
-
-
+trapezium = Trapezium("Трапеція", 2, 5, 3)
+print(f"{trapezium.name}: Площа = {trapezium.area()}")
