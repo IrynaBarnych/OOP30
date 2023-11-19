@@ -18,7 +18,7 @@ class Figure:
         return int(self.area())  # Змінено на int(self.area())
 
     def __str__(self):
-        return f"{self.name} - Площа: {self.area()}"
+        return f"{self.name} - Площа, кв.м: {self.area()}"
 
 class Rectangle(Figure):
     def __init__(self, name, length, width):
@@ -58,19 +58,15 @@ class Trapezium(Figure):
 
 # Приклад використання:
 rectangle = Rectangle("Прямокутник", 4, 6)
-print(int(rectangle))
 print(str(rectangle))
 
 circle = Circle("Коло", 5)
-print(int(circle))
 print(str(circle))
 
 triangle = Triangle("Прямокутний трикутник", 3, 4)
-print(int(triangle))
 print(str(triangle))
 
 trapezium = Trapezium("Трапеція", 2, 5, 3)
-print(int(trapezium))
 print(str(trapezium))
 
 
