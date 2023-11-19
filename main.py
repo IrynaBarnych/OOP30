@@ -19,94 +19,95 @@
 
 
 class Shape:
-    def __init__(self, name):
-        self.name = name  # Назва фігури
+    def __init__(self, shape_type):
+        self.shape_type = shape_type
 
     def show(self):
-        print(f"Shape: {self.name}")
+        print(f"Тип фігури: {self.shape_type}")
 
-    def save(self, filename):
-        with open(filename, 'w') as file:
-            file.write(f"{self.name}")
-
-    def load(self, filename):
-        with open(filename, 'r') as file:
-            self.name = file.readline().strip()
+    def save(self, file):
+        file.write(f"Тип фігури: {self.shape_type}\n")
 
 
 class Square(Shape):
-    def __init__(self, left_top_x, left_top_y, side_length):
-        super().__init__("Square")
-        self.left_top_x = left_top_x
-        self.left_top_y = left_top_y
+    def __init__(self, top_left_x, top_left_y, side_length):
+        super().__init__("Квадрат")
+        self.top_left_x = top_left_x
+        self.top_left_y = top_left_y
         self.side_length = side_length
 
     def show(self):
         super().show()
-        print(f"Left Top: ({self.left_top_x}, {self.left_top_y}), Side Length: {self.side_length}")
+        print(f"Координати верхнього лівого кута: ({self.top_left_x}, {self.top_left_y})")
+        print(f"Довжина сторони: {self.side_length}")
 
-    def save(self, filename):
-        super().save(filename)
-        with open(filename, 'a') as file:
-            file.write(f"{self.left_top_x} {self.left_top_y} {self.side_length}\n")
+    def save(self, file):
+        super().save(file)
+        file.write(f"Верхній лівий кут: {self.top_left_x}, {self.top_left_y}\n")
+        file.write(f"Довжина сторони: {self.side_length}\n")
 
-    def load(self, filename):
-        super().load(filename)
-        with open(filename, 'r') as file:
-            data = file.readline().split()
-            self.left_top_x, self.left_top_y, self.side_length = map(int, data[1:])
+    @classmethod
+    def load(cls, file):
+        top_left_x, top_left_y = map(int, file.readline().split(":")[-1].strip().split(", "))
+        side_length = int(file.readline().split(":")[-1].strip())
+        return cls(top_left_x, top_left_y, side_length)
 
 
 class Rectangle(Shape):
-    def __init__(self, left_top_x, left_top_y, width, height):
-        super().__init__("Rectangle")
-        self.left_top_x = left_top_x
-        self.left_top_y = left_top_y
+    def __init__(self, top_left_x, top_left_y, length, width):
+        super().__init__("Прямокутник")
+        self.top_left_x = top_left_x
+        self.top_left_y = top_left_y
+        self.length = length
         self.width = width
-        self.height = height
 
     def show(self):
         super().show()
-        print(f"Left Top: ({self.left_top_x}, {self.left_top_y}), Width: {self.width}, Height: {self.height}")
+        print(f"Координати верхнього лівого кута: ({self.top_left_x}, {self.top_left_y})")
+        print(f"Довжина: {self.length}")
+        print(f"Ширина: {self.width}")
 
-    def save(self, filename):
-        super().save(filename)
-        with open(filename, 'a') as file:
-            file.write(f"{self.left_top_x} {self.left_top_y} {self.width} {self.height}\n")
+    def save(self, file):
+        super().save(file)
+        file.write(f"Верхній лівий кут: {self.top_left_x}, {self.top_left_y}\n")
+        file.write(f"Довжина: {self.length}\n")
+        file.write(f"Ширина: {self.width}\n")
 
-    def load(self, filename):
-        super().load(filename)
-        with open(filename, 'r') as file:
-            data = file.readline().split()
-            self.left_top_x, self.left_top_y, self.width, self.height = map(int, data)
+    @classmethod
+    def load(cls, file):
+        top_left_x, top_left_y = map(int, file.readline().split(":")[-1].strip().split(", "))
+        length = int(file.readline().split(":")[-1].strip())
+        width = int(file.readline().split(":")[-1].strip())
+        return cls(top_left_x, top_left_y, length, width)
 
 
 class Circle(Shape):
     def __init__(self, center_x, center_y, radius):
-        super().__init__("Circle")
+        super().__init__("Коло")
         self.center_x = center_x
         self.center_y = center_y
         self.radius = radius
 
     def show(self):
         super().show()
-        print(f"Center: ({self.center_x}, {self.center_y}), Radius: {self.radius}")
+        print(f"Координати центру: ({self.center_x}, {self.center_y})")
+        print(f"Радіус: {self.radius}")
 
-    def save(self, filename):
-        super().save(filename)
-        with open(filename, 'a') as file:
-            file.write(f"{self.center_x} {self.center_y} {self.radius}\n")
+    def save(self, file):
+        super().save(file)
+        file.write(f"Кординати центру: {self.center_x}, {self.center_y}\n")
+        file.write(f"Радіус: {self.radius}\n")
 
-    def load(self, filename):
-        super().load(filename)
-        with open(filename, 'r') as file:
-            data = file.readline().split()
-            self.center_x, self.center_y, self.radius = map(int, data)
+    @classmethod
+    def load(cls, file):
+        center_x, center_y = map(int, file.readline().split(":")[-1].strip().split(","))
+        radius = int(file.readline().split(":")[-1].strip())
+        return cls(center_x, center_y, radius)
 
 
 class Ellipse(Shape):
     def __init__(self, left_top_x, left_top_y, width, height):
-        super().__init__("Ellipse")
+        super().__init__("Еліпс")
         self.left_top_x = left_top_x
         self.left_top_y = left_top_y
         self.width = width
@@ -114,42 +115,62 @@ class Ellipse(Shape):
 
     def show(self):
         super().show()
-        print(f"Left Top: ({self.left_top_x}, {self.left_top_y}), Width: {self.width}, Height: {self.height}")
+        print(f"Координати верхнього лівого кута: ({self.left_top_x}, {self.left_top_y})")
+        print(f"Розміри прямокутника: ({self.width}, {self.height})")
 
-    def save(self, filename):
-        super().save(filename)
-        with open(filename, 'a') as file:
-            file.write(f"{self.left_top_x} {self.left_top_y} {self.width} {self.height}\n")
+    def save(self, file):
+        super().save(file)
+        file.write(f"Кординати верхнього кута: ({self.left_top_x}, {self.left_top_y})\n")
+        file.write(f"Розміри прямокутника: ({self.width}, {self.height})\n")
 
-    def load(self, filename):
-        super().load(filename)
-        with open(filename, 'r') as file:
-            data = file.readline().split()
-            self.left_top_x, self.left_top_y, self.width, self.height = map(int, data)
-
-
-# Створення фігур
-square = Square(0, 0, 5)
-rectangle = Rectangle(0, 0, 4, 6)
-circle = Circle(0, 0, 3)
-ellipse = Ellipse(0, 0, 4, 2)
-
-# Створення списку фігур
-figures = [square, rectangle, circle, ellipse]
-
-# Збереження фігур у файл
-for index, figure in enumerate(figures):
-    figure.save(f"figure_{index}.txt")
+    @classmethod
+    def load(cls, file):
+        left_top_str = file.readline().split(":")[-1].strip()
+        left_top_x, left_top_y = map(int, left_top_str[1:-1].split(","))
+        width_str = file.readline().split(":")[-1].strip()
+        height_str = file.readline().split(":")[-1].strip()
+        width, height = map(int, width_str[1:-1].split(","))
+        return cls(left_top_x, left_top_y, width, height)
 
 
-loaded_figures = []
 
-# Завантаження фігур з файлів
-for index in range(len(figures)):
-    loaded_figure = Square(0, 0, 0)
-    loaded_figure.load(f"figure_{index}.txt")
-    loaded_figures.append(loaded_figure)
+# Створення фігур та збереження їх у файл
+shapes = [
+    Square(0, 0, 5),
+    Rectangle(1, 1, 6, 4),
+    Circle(0, 0, 3),
+    Ellipse(2, 2, 5, 3)
+]
 
-# Відображення інформації про кожну фігуру
-for figure in loaded_figures:
-    print(figure)
+filename = "shapes.txt"
+with open(filename, 'w') as file:
+    for shape in shapes:
+        shape.show()
+        shape.save(file)
+        file.write("\n")
+
+# Завантаження фігур з файлу та відображення інформації про них
+loaded_shapes = []
+with open(filename, 'r') as file:
+    line = file.readline()
+    while line:
+        shape_type = line.split(":")[-1].strip()
+        if shape_type == "Квадрат":
+            loaded_shape = Square.load(file)
+        elif shape_type == "Прямокутник":
+            loaded_shape = Rectangle.load(file)
+        elif shape_type == "Коло":
+            loaded_shape = Circle.load(file)
+        elif shape_type == "Еліпс":
+            loaded_shape = Ellipse.load(file)
+
+        loaded_shapes.append(loaded_shape)
+
+        line = file.readline()
+
+# Ві
+
+
+
+
+
